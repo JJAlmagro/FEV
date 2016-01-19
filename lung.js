@@ -2,7 +2,7 @@
  * Created by JoséJuan on 13/01/2016.
  */
 
-var	margin = {top: 30, right: 30, bottom: 30, left: 30},
+var	margin = {top: 30, right: 30, bottom: 48, left: 30},
     width = 500 - margin.left - margin.right,
     height = 270 - margin.top - margin.bottom;
 
