@@ -2,7 +2,7 @@
  * Created by JoséJuan on 13/01/2016.
  */
 
-var	margin = {top: 30, right: 30, bottom: 30, left: 0},
+var	margin = {top: 30, right: 30, bottom: 30, left: 30},
     width = 500 - margin.left - margin.right,
     height = 270 - margin.top - margin.bottom;
 
@@ -821,16 +821,16 @@ d3.csv(filename1, function(error, data) {
     });
 });
 }
-var margin3 = {top:20 , right: 20, bottom: 30, left: 40},
+var margin3 = {top:20 , right: 20, bottom: 30, left: 100},
     width3 = 1300 - margin3.left - margin3.right,
     height3 = 120 - margin3.top - margin3.bottom;
 
 var svg3 = d3.select("#people").append("svg")
-    .attr("transform", "translate(-50,0)")
     .attr("id", "gender")
     .attr("width", width3)
     .attr("height", height3 + margin3.top + margin3.bottom)
-    .append("g");
+    .append("g")
+    .attr("transform", "translate(15,0)");
 svg3.append("text")
     .attr("transform", "translate("+ 10 + "," + 7 + ")")
     .attr("dy", ".35em")
