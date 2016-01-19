@@ -5,7 +5,8 @@
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
     <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
     <link rel="shortcut icon" href="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcShvWGXpizxz2hxe4T2966LkJYe0eC-jaypwL794vxXyVtSh40n" />
-
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
     <style>
         #header {
             font-family: Helvetica;
@@ -18,51 +19,12 @@
         position: absolute;
         }
 
-        #section {
+        div.container {
             font-family: Helvetica;
-            position: absolute;
-            padding:10px;
-            margin-left: 15%;
-            margin-right: 15%;
-            background-color: white;
+            width: 1200px;
             text-align: justify;
-            height: 2200px;
-
-        }
-        #layer_selector ul {
-            padding: 0; margin: 0;
-            list-style-type: none;
-        }
-        #layer_selector li {
-            border-bottom: 1px solid #999;
-            padding: 15px 30px;
-            font-family: "Helvetica", Arial;
-            font-size: 13px;
-            color: #444;
-            cursor: auto;
-        }
-        #layer_selector li:hover {
-            background-color: #F0F0F0;
-            cursor: pointer;
-        }
-        #layer_selector li.selected {
-            background-color: #EEE;
         }
 
-     
-        .myButton:hover {
-            background-color:transparent;
-        }
-        .myButton:active {
-            position:relative;
-            top:1px;
-        }
-        .selected {
-            fill: orange;
-        }
-        #results {
-            margin-top: 1200px;
-        }
         .line1, .line2 {
             stroke: steelblue;
             stroke-width: 2;
@@ -112,8 +74,11 @@
     <h3>Jose Juan Almagro Armenteros, Joseph Blair & Juan Salamanca Viloria</h3>
 </div>
 
-<div id="section">
+<div class="container">
     <div id="introduction">
+        <h1>
+            The implications of parental smoking
+        </h1>
         <p>
         Nowadays we have a clear understanding of how smoking affects your health, and it is the most common preventable cause of death in the world, with over 2.4 million deaths annually in the USA. There have been many campaigns to address this issue, from shocking images on cigarette packets to the drastic increase in prices. Although people have been made very aware of the immediate health implications smoking can have, people seem to be less conscious of the effects of secondary smoke. 
 
@@ -126,7 +91,8 @@
         </p>
         <p>
             Click on each of the points on the scatter plot and use the dropdown menu to explore the data at different ages and heights.
-        </p>    
+        </p>
+        <div id="all_vis" style="width: 1100px; margin: auto;">
         <div id="visualization">
             
             <p id="menu">
@@ -138,7 +104,7 @@
         </div>
         <div id = "myDiv"></div>
         <div id = "people"></div>
-
+        </div>
         <p>
 
 This investigation shows that parents who smoke, negatively impact their children’s respiratory health. There seems to be a measurable effect on the pulmonary function of the children, with a decrease in forced expiratory volume at almost all ages. The distribution of these values can also be seen in the box and whisker plot,  which in some cases shows a clear discrepancy between children with smoking and non-smoking parents. It is hard however to say that this study is conclusive, and a much larger data set is needed to confirm these findings.
