@@ -4,8 +4,8 @@
     <title>Final Project: Force Expiratory Volume for children with smoking parents</title>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
     <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
-    <link rel="shortcut icon" href="http://cartodb.com/assets/favicon.ico" />
-    <link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v3/3.15/themes/css/cartodb.css" />
+    <link rel="shortcut icon" href="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcShvWGXpizxz2hxe4T2966LkJYe0eC-jaypwL794vxXyVtSh40n" />
+
     <style>
         #header {
             font-family: Helvetica;
@@ -30,13 +30,15 @@
 
         #section {
             font-family: Helvetica;
-            width:65%;
+            width:85%;
             float:left;
             padding:10px;
-            margin-left: 12%;
+            margin-left: 10%;
             margin-right: 10%;
             background-color: white;
             text-align: justify;
+            height: 2200px;
+            width: 1100px
 
         }
         #layer_selector ul {
@@ -59,26 +61,7 @@
             background-color: #EEE;
         }
 
-        .myButton {
-            -moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
-            -webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
-            box-shadow:inset 0px 1px 0px 0px #ffffff;
-            background-color:transparent;
-            -moz-border-radius:6px;
-            -webkit-border-radius:6px;
-            border-radius:6px;
-            border:1px solid #dcdcdc;
-            display:inline-block;
-            cursor:pointer;
-            color:#666666;
-            font-family:Arial;
-            font-size:15px;
-            font-weight:bold;
-            padding:6px 24px;
-            text-decoration:none;
-            text-shadow:0px 1px 0px #ffffff;
-            width: 90%;
-        }
+     
         .myButton:hover {
             background-color:transparent;
         }
@@ -128,23 +111,36 @@
             float: left;
         }
 
+        .boxed{
+
+            border: 1px solid green;
+        }
+
     </style>
 </head>
 <body>
 <div id="header">
-    <h1>Final Project</h1>
+    <h1>Do You Mind If I Smoke?</h1>
     <h3>Jose Juan Almagro Armenteros, Joseph Blair & Juan Salamanca Viloria</h3>
 </div>
-<div id="nav" >
-    <a href = "#introduction" class="myButton">Introduction</a>
-    <a href = "#instructions" class="myButton">Instructions</a>
-    <a href = "#discussion" class="myButton">Discussion</a>
 
-</div>
 <div id="section">
-    <div id="discussion">
-        <h2>Discussion</h2>
+    <div id="introduction">
+        <p>
+        Nowadays we have a clear understanding of how smoking affects your health, and it is the most common preventable cause of death in the world, with over 2.4 million deaths annually in the USA. There have been many campaigns to address this issue, from shocking images on cigarette packets to the drastic increase in prices. Although people have been made very aware of the immediate health implications smoking can have, people seem to be less conscious of the effects of secondary smoke. 
+
+        </p>    
+
+        <p>
+
+        To address this matter, a study was conducted to investigate the effect of second hand smoke on the pulmonary function of children <sup><a href="#fn1" id="ref1">1</a></sup>. The force expiratory volume (FEV), the volume of air that can be expelled after taking a deep breath ,was measured in a control set of children with non-smoking parents and a second group whose parents smoked. This was evaluated in 654 children of a range between 3 and 19, in which age, sex and height were taken in to consideration. The results of this study can be seen in the graphic below. 
+
+        </p>
+        <p>
+            Click on each of the points on the scatter plot and use the dropdown menu to explore the data at different ages and heights.
+        </p>    
         <div id="visualization">
+            
             <p id="menu">
                 Select:
                 <select id="categories">
@@ -154,10 +150,28 @@
         </div>
         <div id = "myDiv"></div>
         <div id = "people"></div>
+
+        <p>
+
+This investigation shows that parents who smoke, negatively impact their children’s respiratory health. There seems to be a measurable effect on the pulmonary function of the children, with a decrease in forced expiratory volume at almost all ages. The distribution of these values can also be seen in the box and whisker plot,  which in some cases shows a clear discrepancy between children with smoking and non-smoking parents. It is hard however to say that this study is conclusive, and a much larger data set is needed to confirm these findings.
+
+        </p>   
+        <br> 
+
+        <h1>
+            What Does This Mean For Your Children?
+        </h1>
+
+        <p>
+Use the below visualisation to calculate the effect smoking has on your child’s pulmonary function. With smaller lungs, the effect on younger children is greater, with the forced expiratory volume reduced the most. 
+
+These values were calculated from the experiment above, using a linear model to predict the change in FEV from age, height and gender <sup><a href="#fn2" id="ref2">2</a></sup>. </p>
+<p>The circles to the right of the lungs show the estimated percentage difference in FEV between a child with smoking parents and a child with non-smoking parents (black), the estimated FEV of a child with non-smoking parents (blue), and the estimated FEV of a child with smoking parents (red).</p>
+        
         <div id="lung" align="center" >
             <p>
-                Age <input id="age" style="width: 30px;"/>
-                Height <input id="height" style="width: 30px;" />
+                Age (Years) <input id="age" style="width: 30px;"/>
+                Height (Inches) <input id="height" style="width: 30px;" />
                 <select id= "help" >
 
                     <option  value="" disabled="disabled" selected="selected">Please       select a Gender</option>
@@ -168,10 +182,18 @@
                 <input type="button" value="Submit" id="button1"><br>
             </p>
         </div>
+            <p>
+                We hope this makes you think twice before smoking in front of your kids!</p>
 
+                <br>
+                <br>
+
+
+                <sup id="fn1">1.Tager, I. B., Weiss, S. T., Rosner, B., & SPEIZER, F. E. (1979). Effect of parental cigarette smoking on the pulmonary function of children. American Journal of Epidemiology, 110(1), 15-26.<a href="#ref1" title="Jump back to footnote 2 in the text.">↩</a></sup><br>
+
+<sup id="fn2">2. R Primer. Copyright, Christopher G. Green (cggreen AT uw.edu), 2005, 2006., page 82<a href="#ref2" title="Jump back to footnote 2 in the text.">↩</a></sup>
     </div>
-    <div id="results">
-    </div>
+   
 </div>
 
 
@@ -181,6 +203,10 @@
 <script type="text/javascript"></script>
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 <script src="lung.js"></script>
+<p>
+
+</p>
+
 
 </body>
 </html>

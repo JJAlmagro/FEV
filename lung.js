@@ -2,8 +2,8 @@
  * Created by JoséJuan on 13/01/2016.
  */
 
-var	margin = {top: 30, right: 40, bottom: 30, left: 50},
-    width = 600 - margin.left - margin.right,
+var	margin = {top: 30, right: 30, bottom: 30, left: 0},
+    width = 500 - margin.left - margin.right,
     height = 270 - margin.top - margin.bottom;
 
 
@@ -31,8 +31,9 @@ var	svg = d3.select("#visualization")
     .append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
+    .attr("transform", "translate(" + 0 + "," + margin.top + ")")
     .append("g")
-    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+    .attr("transform", "translate(" + 18 + "," + margin.top + ")");
 
 // Get the data
 d3.csv("mean_nonsmoker.csv", function(error, data) {
@@ -49,8 +50,6 @@ d3.csv("mean_nonsmoker.csv", function(error, data) {
         });
         // Scale the range of the data
         x.domain([2, d3.max(data,function(d) {return Math.max(d.Age)})]);
-        // x.domain(d3.extent(data, function(d) { return d.Age; }));
-        // y.domain([0.5, d3.max(data, function(d) { return Math.max(d.FEV); })]);
         y.domain([0.5, 6.5]);
 
         svg.append("path")		// Add the valueline path.
@@ -83,7 +82,7 @@ d3.csv("mean_nonsmoker.csv", function(error, data) {
                     .style("opacity", .9);
                 div	.html("Age: " + (d.Age) + "<br/>" + "FEV: " + Math.round(d.FEV*100)/100)
                     .style("left", (d3.event.pageX) + "px")
-                    .style("top", (d3.event.pageY - 28) + "px");
+                    .style("top", (d3.event.pageY - 28) + "px"), d3.selectAll(".dots1").style("cursor", "pointer");
             })
             .on("mouseout", function(d) {
                 div.transition()
@@ -111,7 +110,7 @@ d3.csv("mean_nonsmoker.csv", function(error, data) {
                     .style("opacity", .9);
                 div	.html("Age: " + (d.Age) + "<br/>" + "FEV: " + Math.round(d.FEV*100)/100)
                     .style("left", (d3.event.pageX) + "px")
-                    .style("top", (d3.event.pageY - 28) + "px");
+                    .style("top", (d3.event.pageY - 28) + "px"), d3.selectAll(".dots2").style("cursor", "pointer");
             })
             .on("mouseout", function(d) {
                 div.transition()
@@ -139,22 +138,31 @@ d3.csv("mean_nonsmoker.csv", function(error, data) {
             .attr("y", 6)
             .attr("dy", ".71em")
             .style("text-anchor", "end")
-            .text("FEV");
+            .text("FEV (L)");
 
         svg.append("text")
             // .attr("transform", "translate(" + (width+3) + "," + y(data[0].Age) + ")")
-            .attr("transform", "translate(" + (200) +"," + 5 + ")")
+            .attr("transform", "translate(" + (230) +"," + 35 + ")")
             .attr("dy", ".35em")
             .attr("text-anchor", "start")
             .style("fill", "red")
-            .text("Smoker");
+            .text("Smoking");
 
         svg.append("text")
-            .attr("transform", "translate(" + (100) + "," + 5+ ")")
+            .attr("id", "title")
+            .attr("transform", "translate(" + (130) +"," + (-20) + ")")
+            .attr("dy", ".35em")
+            .attr("text-anchor", "start")
+            .style("fill", "black")
+            .style("font-size", "17px")
+            .text("Average FEV at each Age");
+
+        svg.append("text")
+            .attr("transform", "translate(" + (100) + "," + 35 + ")")
             .attr("dy", ".35em")
             .attr("text-anchor", "start")
             .style("fill", "steelblue")
-            .text("Non Smoker");
+            .text("Non Smoking");
 
         var menu = d3.select("#categories")
             .on("change", function() {
@@ -214,8 +222,9 @@ d3.csv("mean_nonsmoker.csv", function(error, data) {
             if (arg3 == "d.Ht") {
                 var ii = function(d) { return x(d.Ht); };
                 x.domain([46,d3.max(data, function(d) { return d.Ht; })]);
-                var label = "Height" ;
-
+                var label = "Height (in)" ;
+                svg.select("#title")
+                    .text("Average FEV at each Height");
                 svg.selectAll("circle.dots1")
                     .on('click', function(d) {
                         console.log(d.i);
@@ -227,9 +236,9 @@ d3.csv("mean_nonsmoker.csv", function(error, data) {
                         div.transition()
                             .duration(200)
                             .style("opacity", .9);
-                        div	.html((d.Ht) + "<br/>"  + d.FEV)
+                        div	.html("Ht: " + (d.Ht) + "<br/>" + "FEV: " + Math.round(d.FEV*100)/100)
                             .style("left", (d3.event.pageX) + "px")
-                            .style("top", (d3.event.pageY - 28) + "px");
+                            .style("top", (d3.event.pageY - 28) + "px"), d3.selectAll(".dots2").style("cursor", "pointer");
                     })
                     .on("mouseout", function(d) {
                         div.transition()
@@ -246,9 +255,9 @@ d3.csv("mean_nonsmoker.csv", function(error, data) {
                         div.transition()
                             .duration(200)
                             .style("opacity", .9);
-                        div	.html((d.Ht) + "<br/>"  + d.FEV)
+                        div	.html("Ht: " + (d.Ht) + "<br/>" + "FEV: " + Math.round(d.FEV*100)/100)
                             .style("left", (d3.event.pageX) + "px")
-                            .style("top", (d3.event.pageY - 28) + "px");
+                            .style("top", (d3.event.pageY - 28) + "px"), d3.selectAll(".dots2").style("cursor", "pointer");
                     })
                     .on("mouseout", function(d) {
                         div.transition()
@@ -260,7 +269,8 @@ d3.csv("mean_nonsmoker.csv", function(error, data) {
                 var ii = function(d) { return x(d.Age); };
                 x.domain([2, d3.max(data,function(d) {return Math.max(d.Age)})]);
                 var label = "Age";
-
+                svg.select("#title")
+                    .text("Average FEV at each Age");
                 svg.selectAll("circle.dots1")
                     .on('click', function(d) {
                         boxplot(d.Age, "smokey.csv","smoken.csv", " years old");
@@ -271,9 +281,9 @@ d3.csv("mean_nonsmoker.csv", function(error, data) {
                         div.transition()
                             .duration(200)
                             .style("opacity", .9);
-                        div	.html((d.Age) + "<br/>"  + d.FEV)
+                        div	.html("Age: " + (d.Age) + "<br/>" + "FEV: " + Math.round(d.FEV*100)/100)
                             .style("left", (d3.event.pageX) + "px")
-                            .style("top", (d3.event.pageY - 28) + "px");
+                            .style("top", (d3.event.pageY - 28) + "px"), d3.selectAll(".dots2").style("cursor", "pointer");
                     })
                     .on("mouseout", function(d) {
                         div.transition()
@@ -290,9 +300,9 @@ d3.csv("mean_nonsmoker.csv", function(error, data) {
                         div.transition()
                             .duration(200)
                             .style("opacity", .9);
-                        div	.html((d.Age) + "<br/>"  + d.FEV)
+                        div	.html("Age: " + (d.Age) + "<br/>" + "FEV: " + Math.round(d.FEV*100)/100)
                             .style("left", (d3.event.pageX) + "px")
-                            .style("top", (d3.event.pageY - 28) + "px");
+                            .style("top", (d3.event.pageY - 28) + "px"), d3.selectAll(".dots2").style("cursor", "pointer");
                     })
                     .on("mouseout", function(d) {
                         div.transition()
@@ -421,15 +431,21 @@ d3.csv(filename1, function(error, data) {
 
             autosize: false,
             width: 500,
-            height: 400,
+            height: 340,
             margin: {
                 l: 50,
                 r: 50,
-                b: 100,
+                b: 30,
                 t: 100,
                 pad: 4
             },
-            title: exp + mes,
+            font: {
+                family: "Helvetica"
+            },
+            title: "FEV variance at " + exp + mes,
+            yaxis: {
+                title: 'FEV (L)'
+            }
 
         };
 
@@ -491,7 +507,7 @@ document.getElementById("button1").addEventListener('click',
             console.log("Missing parameters");
         } else {
             var SM = (smoking(height2, age, gender, 1));
-            var N_SM =(non_smoking(height2, age, gender, 0));
+            var N_SM = (non_smoking(height2, age, gender, 0));
 
             var perc_change = Math.round((((1-(SM/N_SM))*100))*10)/10;
 
@@ -514,15 +530,29 @@ document.getElementById("button1").addEventListener('click',
             lungs.selectAll(".text1-label")
                 .duration(1200)
                 .text(perc_change.toString() + "%")
-                .attr("transform", "translate("+  (504 + mv) + "," + (89 + mv) + ")");
+                .attr("transform", "translate("+  (503 + mv) + "," + (89 + mv) + ")");
             lungs.selectAll(".text2-label")
                 .duration(1200)
-                .attr("transform", "translate("+  (508 + mv) + "," + (104 + mv) + ")");
+                .attr("transform", "translate("+  (505 + mv) + "," + (104 + mv) + ")");
+            lungs.selectAll(".fev1-label")
+                .duration(1200)
+                .text(Math.round(N_SM*100)/100)
+                .attr("transform", "translate("+  (570 + mv) + "," + (89 + mv) + ")");
+            lungs.selectAll(".fev2-label")
+                .duration(1200)
+                .text(Math.round(SM*100)/100)
+                .attr("transform", "translate("+  (635 + mv) + "," + (89 + mv) + ")");
+            lungs.selectAll(".fev3-label")
+                .duration(1200)
+                .attr("transform", "translate("+  (578 + mv) + "," + (108 + mv) + ")");
+            lungs.selectAll(".fev4-label")
+                .duration(1200)
+                .attr("transform", "translate("+  (643 + mv) + "," + (108 + mv) + ")");
         }
     });
 
-var margin2 = {top:20 , right: 20, bottom: 30, left: 40},
-    width2 = 960 - margin2.left - margin2.right,
+var margin2 = {top:20 , right: 0, bottom: 30, left: 40},
+    width2 = 1000 - margin2.left - margin2.right,
     height2 = 500 - margin2.top - margin2.bottom;
 
 var svg2 = d3.select("#lung").append("svg")
@@ -567,36 +597,105 @@ svg2.append("circle")
     .attr("cx", 480)
     .attr("cy", 75)
     .attr("r", 30)
-    .attr("stroke", "blue")
+    .attr("stroke", "black")
     .attr("stroke-width", "3")
     .attr("fill", "transparent")
     .attr("transform", "translate("+ (margin2.left + mv) + "," + (margin2.top + mv) + ")");
 svg2.append("text")
     .attr("class", "text1-label")
-    .attr("transform", "translate("+  (506 + mv) + "," + (89 + mv) + ")")
+    .attr("transform", "translate("+  (503 + mv) + "," + (89 + mv) + ")")
     .attr("dy", ".35em")
     .attr("text-anchor", "start")
     .style("fill", "black")
-    .text("0 %");
+    .text("0.0 %");
 svg2.append("text")
     .attr("class", "text2-label")
-    .attr("transform", "translate("+  (508 + mv) + "," + (104 + mv) + ")")
+    .attr("transform", "translate("+  (505 + mv) + "," + (108 + mv) + ")")
     .attr("dy", ".35em")
     .attr("text-anchor", "start")
     .style("fill", "black")
     .text("less");
+svg2.append("circle")
+    .attr("class", "circle-label")
+    .attr("cx", 543)
+    .attr("cy", 75)
+    .attr("r", 30)
+    .attr("stroke", "lightblue")
+    .attr("stroke-width", "3")
+    .attr("fill", "transparent")
+    .attr("transform", "translate("+ (margin2.left + mv) + "," + (margin2.top + mv) + ")");
+svg2.append("circle")
+    .attr("class", "circle-label")
+    .attr("cx", 606)
+    .attr("cy", 75)
+    .attr("r", 30)
+    .attr("stroke", "red")
+    .attr("stroke-width", "3")
+    .attr("fill", "transparent")
+    .attr("transform", "translate("+ (margin2.left + mv) + "," + (margin2.top + mv) + ")");
+svg2.append("text")
+    .attr("class", "fev1-label")
+    .attr("transform", "translate("+  (570 + mv) + "," + (89 + mv) + ")")
+    .attr("dy", ".35em")
+    .attr("text-anchor", "start")
+    .style("fill", "black")
+    .text("0.0");
+svg2.append("text")
+    .attr("class", "fev2-label")
+    .attr("transform", "translate("+  (635 + mv) + "," + (89 + mv) + ")")
+    .attr("dy", ".35em")
+    .attr("text-anchor", "start")
+    .style("fill", "black")
+    .text("0.0");
+svg2.append("text")
+    .attr("class", "fev3-label")
+    .attr("transform", "translate("+  (578 + mv) + "," + (108 + mv) + ")")
+    .attr("dy", ".35em")
+    .attr("text-anchor", "start")
+    .style("fill", "black")
+    .text("L");
+svg2.append("text")
+    .attr("class", "fev4-label")
+    .attr("transform", "translate("+  (643 + mv) + "," + (108 + mv) + ")")
+    .attr("dy", ".35em")
+    .attr("text-anchor", "start")
+    .style("fill", "black")
+    .text("L");
 
-var margin3 = {top:20 , right: 20, bottom: 30, left: 40},
-    width3 = 1300 - margin3.left - margin3.right,
-    height3 = 200 - margin3.top - margin3.bottom;
+function boy(pos, ypos, color, clas) {
+    svg3.append("path")
+        .attr("class", clas)
+        .attr("d", "M46.004,21.672c5.975,0,10.836-4.861,10.836-10.836S51.979,0,46.004,0c-5.975,0-10.835,4.861-10.835,10.836 S40.029,21.672,46.004,21.672z")
+        .attr("stroke", "black")
+        .attr("fill", color)
+        .attr("stroke-width", "1")
+        .attr("transform", "translate(" + pos + "," + ypos + ")scale(0.35)");
+    svg3.append("path")
+        .attr("class", clas)
+        .attr("d", "M68.074,54.008L59.296,26.81c-0.47-1.456-2.036-2.596-3.566-2.596h-1.312H53.48H38.526h-0.938h-1.312 c-1.53,0-3.096,1.14-3.566,2.596l-8.776,27.198c-0.26,0.807-0.152,1.623,0.297,2.24s1.193,0.971,2.041,0.971h2.25 c1.53,0,3.096-1.14,3.566-2.596l2.5-7.75v10.466v0.503v29.166c0,2.757,2.243,5,5,5h0.352c2.757,0,5-2.243,5-5V60.842h2.127v26.166 c0,2.757,2.243,5,5,5h0.352c2.757,0,5-2.243,5-5V57.842v-0.503v-10.47l2.502,7.754c0.47,1.456,2.036,2.596,3.566,2.596h2.25 c0.848,0,1.591-0.354,2.041-0.971S68.334,54.815,68.074,54.008z")
+        .attr("stroke", "black")
+        .attr("fill", color)
+        .attr("stroke-width", "1")
+        .attr("transform", "translate(" + pos + "," + ypos + ")scale(0.35)");
+}
+function girl(pos, ypos, color, clas) {
+    svg3.append("path")
+        .attr("class", clas)
+        .attr("d", "M21.457,12.522c0.229-0.981-1.104-5.02-1.104-5.02c-0.148-0.381-0.857-1.548-2.853-1.56l-3.897,0.012c-1.933-0.107-2.646,0.999-2.825,1.584c0,0-1.295,4.068-1.08,4.984c0.143,0.602,1.218,1.341,2.35,1.88l-2.375,7.245l3.476-0.011l0.009,8.789c0.067,0.677,0.538,0.925,1.116,0.925c0.575,0,1.047-0.228,1.113-0.904h0.358c0.067,0.678,0.535,0.916,1.113,0.916s1.046-0.254,1.115-0.93l0.01-8.796l3.705,0.005l-2.262-7.396C20.435,13.725,21.329,13.066,21.457,12.522z")
+        .attr("stroke", "black")
+        .attr("fill", color)
+        .attr("stroke-width", "0.4")
+        .attr("transform", "translate("+ ( pos + 1.8) + "," + ypos + ")scale(0.9)");
 
-var svg3 = d3.select("#people").append("svg")
-    .attr("id", "gender")
-    .attr("width", width3)
-    .attr("height", height3 + margin3.top + margin3.bottom)
-    .append("g");
+    svg3.append("path")
+        .attr("class", clas)
+        .attr("d", "M46.004,21.672c5.975,0,10.836-4.861,10.836-10.836S51.979,0,46.004,0c-5.975,0-10.835,4.861-10.835,10.836 S40.029,21.672,46.004,21.672z")
+        .attr("stroke", "black")
+        .attr("fill", color)
+        .attr("stroke-width", "1")
+        .attr("transform", "translate("+ (pos + 1.3) + "," + (ypos - 3) + ")scale(0.32)");
+}
 
-gender(13, "", "mean_nonsmoker.csv", "mean_smoker.csv");
 function gender(index, file, filename1, filename2) {
 d3.csv(filename1, function(error, data) {
     d3.csv(filename2, function(error2, data2) {
@@ -661,76 +760,45 @@ d3.csv(filename1, function(error, data) {
 
     for (var p = 0; p < totalM; p++) {
         var pos = p * 18;
+        var ypos = 30;
         if(p < manNS) {
-            svg3.append("path")
-                .attr("class", "person")
-                .attr("d", "M46.004,21.672c5.975,0,10.836-4.861,10.836-10.836S51.979,0,46.004,0c-5.975,0-10.835,4.861-10.835,10.836 S40.029,21.672,46.004,21.672z")
-                .attr("stroke", "black")
-                .attr("fill", "lightblue")
-                .attr("stroke-width", "1")
-                .attr("transform", "translate(" + pos + "," + 0 + ")scale(0.35)");
-            svg3.append("path")
-                .attr("class", "person")
-                .attr("d", "M68.074,54.008L59.296,26.81c-0.47-1.456-2.036-2.596-3.566-2.596h-1.312H53.48H38.526h-0.938h-1.312 c-1.53,0-3.096,1.14-3.566,2.596l-8.776,27.198c-0.26,0.807-0.152,1.623,0.297,2.24s1.193,0.971,2.041,0.971h2.25 c1.53,0,3.096-1.14,3.566-2.596l2.5-7.75v10.466v0.503v29.166c0,2.757,2.243,5,5,5h0.352c2.757,0,5-2.243,5-5V60.842h2.127v26.166 c0,2.757,2.243,5,5,5h0.352c2.757,0,5-2.243,5-5V57.842v-0.503v-10.47l2.502,7.754c0.47,1.456,2.036,2.596,3.566,2.596h2.25 c0.848,0,1.591-0.354,2.041-0.971S68.334,54.815,68.074,54.008z")
-                .attr("stroke", "black")
-                .attr("fill", "lightblue")
-                .attr("stroke-width", "1")
-                .attr("transform", "translate(" + pos + "," + 0 + ")scale(0.35)");
+                boy(pos, ypos, "lightblue", "person")
         } else {
-            svg3.append("path")
-                .attr("class", "person")
-                .attr("d", "M46.004,21.672c5.975,0,10.836-4.861,10.836-10.836S51.979,0,46.004,0c-5.975,0-10.835,4.861-10.835,10.836 S40.029,21.672,46.004,21.672z")
-                .attr("stroke", "black")
-                .attr("fill", "red")
-                .attr("stroke-width", "1")
-                .attr("transform", "translate(" + pos + "," + 0 + ")scale(0.35)");
-            svg3.append("path")
-                .attr("class", "person")
-                .attr("d", "M68.074,54.008L59.296,26.81c-0.47-1.456-2.036-2.596-3.566-2.596h-1.312H53.48H38.526h-0.938h-1.312 c-1.53,0-3.096,1.14-3.566,2.596l-8.776,27.198c-0.26,0.807-0.152,1.623,0.297,2.24s1.193,0.971,2.041,0.971h2.25 c1.53,0,3.096-1.14,3.566-2.596l2.5-7.75v10.466v0.503v29.166c0,2.757,2.243,5,5,5h0.352c2.757,0,5-2.243,5-5V60.842h2.127v26.166 c0,2.757,2.243,5,5,5h0.352c2.757,0,5-2.243,5-5V57.842v-0.503v-10.47l2.502,7.754c0.47,1.456,2.036,2.596,3.566,2.596h2.25 c0.848,0,1.591-0.354,2.041-0.971S68.334,54.815,68.074,54.008z")
-                .attr("stroke", "black")
-                .attr("fill", "red")
-                .attr("stroke-width", "1")
-                .attr("transform", "translate(" + pos + "," + 0 + ")scale(0.35)");
+                boy(pos, ypos, "red", "person")
         }
     }
 
     for (var p = 0; p < totalF; p++) {
             var pos = p*18;
+            var ypos = 70;
         if(p < femNS) {
-            svg3.append("path")
-                .attr("class", "person")
-                .attr("d", "M21.457,12.522c0.229-0.981-1.104-5.02-1.104-5.02c-0.148-0.381-0.857-1.548-2.853-1.56l-3.897,0.012c-1.933-0.107-2.646,0.999-2.825,1.584c0,0-1.295,4.068-1.08,4.984c0.143,0.602,1.218,1.341,2.35,1.88l-2.375,7.245l3.476-0.011l0.009,8.789c0.067,0.677,0.538,0.925,1.116,0.925c0.575,0,1.047-0.228,1.113-0.904h0.358c0.067,0.678,0.535,0.916,1.113,0.916s1.046-0.254,1.115-0.93l0.01-8.796l3.705,0.005l-2.262-7.396C20.435,13.725,21.329,13.066,21.457,12.522z")
-                .attr("stroke", "black")
-                .attr("fill", "lightblue")
-                .attr("stroke-width", "0.4")
-                .attr("transform", "translate("+ pos + "," + 40 + ")scale(1)");
-
-            svg3.append("path")
-                .attr("class", "person")
-                .attr("d", "M46.004,21.672c5.975,0,10.836-4.861,10.836-10.836S51.979,0,46.004,0c-5.975,0-10.835,4.861-10.835,10.836 S40.029,21.672,46.004,21.672z")
-                .attr("stroke", "black")
-                .attr("fill", "lightblue")
-                .attr("stroke-width", "1")
-                .attr("transform", "translate("+ (pos - 0.5) + "," + 37 + ")scale(0.35)");
+            girl(pos, ypos, "lightblue", "person")
         } else {
-            svg3.append("path")
-                .attr("class", "person")
-                .attr("d", "M21.457,12.522c0.229-0.981-1.104-5.02-1.104-5.02c-0.148-0.381-0.857-1.548-2.853-1.56l-3.897,0.012c-1.933-0.107-2.646,0.999-2.825,1.584c0,0-1.295,4.068-1.08,4.984c0.143,0.602,1.218,1.341,2.35,1.88l-2.375,7.245l3.476-0.011l0.009,8.789c0.067,0.677,0.538,0.925,1.116,0.925c0.575,0,1.047-0.228,1.113-0.904h0.358c0.067,0.678,0.535,0.916,1.113,0.916s1.046-0.254,1.115-0.93l0.01-8.796l3.705,0.005l-2.262-7.396C20.435,13.725,21.329,13.066,21.457,12.522z")
-                .attr("stroke", "black")
-                .attr("fill", "red")
-                .attr("stroke-width", "0.4")
-                .attr("transform", "translate("+ pos + "," + 40 + ")scale(1)");
-
-            svg3.append("path")
-                .attr("class", "person")
-                .attr("d", "M46.004,21.672c5.975,0,10.836-4.861,10.836-10.836S51.979,0,46.004,0c-5.975,0-10.835,4.861-10.835,10.836 S40.029,21.672,46.004,21.672z")
-                .attr("stroke", "black")
-                .attr("fill", "red")
-                .attr("stroke-width", "1")
-                .attr("transform", "translate("+ (pos - 0.5) + "," + 37 + ")scale(0.35)");
+            girl(pos, ypos, "red", "person")
         }
 
     }
     });
 });
 }
+var margin3 = {top:20 , right: 20, bottom: 30, left: 40},
+    width3 = 1300 - margin3.left - margin3.right,
+    height3 = 120 - margin3.top - margin3.bottom;
+
+var svg3 = d3.select("#people").append("svg")
+    .attr("transform", "translate(-50,0)")
+    .attr("id", "gender")
+    .attr("width", width3)
+    .attr("height", height3 + margin3.top + margin3.bottom)
+    .append("g");
+svg3.append("text")
+    .attr("transform", "translate("+ 10 + "," + 7 + ")")
+    .attr("dy", ".35em")
+    .attr("text-anchor", "start")
+    .style("fill", "black")
+    .style("font-size", "17px")
+    .text("Number of males and females in this group:");
+
+
+
+gender(13, "", "mean_nonsmoker.csv", "mean_smoker.csv");
