@@ -71,9 +71,13 @@ d3.csv("mean_nonsmoker.csv", function(error, data) {
             .attr("cy", function(d) { return y(d.FEV); })
             .style("fill", "steelblue")
             .on('click', function(d) {
-                boxplot(d.Age, "smokey.csv","smoken.csv", " years old");
-                d3.selectAll(".person").remove();
-                gender(d.i, "","mean_nonsmoker.csv", "mean_smoker.csv");
+                d3.selectAll(".person")
+                    .style("opacity", 1)
+                    .transition().duration(1000).style("opacity", 0).remove();
+                setTimeout(function() {
+                    gender(d.i, "","mean_nonsmoker.csv", "mean_smoker.csv");
+                    boxplot(d.Age, "smokey.csv","smoken.csv", " years old");
+                }, 800)
             })
 
             .on("mouseover", function(d) {
@@ -100,9 +104,14 @@ d3.csv("mean_nonsmoker.csv", function(error, data) {
             .attr("cy", function(d) { return y(d.FEV); })
             .style("fill", "red")
             .on('click', function(d) {
-                boxplot(d.Age, "smokey.csv","smoken.csv", " years old");
-                d3.selectAll(".person").remove();
-                gender(d.i, "smoke", "mean_nonsmoker.csv", "mean_smoker.csv");
+                d3.selectAll(".person")
+                    .style("opacity", 1)
+                    .transition().duration(1000).style("opacity", 0).remove();
+                setTimeout(function() {
+                    gender(d.i, "smoke", "mean_nonsmoker.csv", "mean_smoker.csv");
+                    boxplot(d.Age, "smokey.csv","smoken.csv", " years old");
+                }, 800)
+
             })
             .on("mouseover", function(d) {
                 div.transition()
@@ -184,9 +193,13 @@ d3.csv("mean_nonsmoker.csv", function(error, data) {
                                 d2.i = +d2.i;
                             });
                             updateData(data,data2, menu.property("value"));
-                            boxplot(67, "Smokebyheight.csv", "NonSmokebyheight.csv", " inches");
-                            d3.selectAll(".person").remove();
-                            gender(14, "", "Nsmoke_scatt.csv", "Smoke_scatt.csv");
+                            d3.selectAll(".person")
+                                .style("opacity", 1)
+                                .transition().duration(1000).style("opacity", 0).remove();
+                            setTimeout(function() {
+                                gender(14, "", "Nsmoke_scatt.csv", "Smoke_scatt.csv");
+                                boxplot(67, "Smokebyheight.csv", "NonSmokebyheight.csv", " inches");
+                            }, 800)
                         });
                     });
                 } else {
@@ -205,9 +218,13 @@ d3.csv("mean_nonsmoker.csv", function(error, data) {
                                 d2.Ht = +d2.Ht
                             });
                             updateData(data,data2, menu.property("value"));
-                            boxplot(15, "smokey.csv","smoken.csv", " years old");
-                            d3.selectAll(".person").remove();
-                            gender(13, "", "mean_nonsmoker.csv", "mean_smoker.csv");
+                            d3.selectAll(".person")
+                                .style("opacity", 1)
+                                .transition().duration(1000).style("opacity", 0).remove();
+                            setTimeout(function() {
+                                gender(13, "", "mean_nonsmoker.csv", "mean_smoker.csv");
+                                boxplot(15, "smokey.csv","smoken.csv", " years old");
+                            }, 800)
                         });
                     });
 
@@ -227,10 +244,13 @@ d3.csv("mean_nonsmoker.csv", function(error, data) {
                     .text("Average FEV at each Height");
                 svg.selectAll("circle.dots1")
                     .on('click', function(d) {
-                        console.log(d.i);
-                        boxplot(d.Ht, "Smokebyheight.csv", "NonSmokebyheight.csv", " inches");
-                        d3.selectAll(".person").remove();
-                        gender(d.i, "", "Nsmoke_scatt.csv", "Smoke_scatt.csv");
+                        d3.selectAll(".person")
+                            .style("opacity", 1)
+                            .transition().duration(1000).style("opacity", 0).remove();
+                        setTimeout(function() {
+                            gender(d.i, "", "Nsmoke_scatt.csv", "Smoke_scatt.csv");
+                            boxplot(d.Ht, "Smokebyheight.csv", "NonSmokebyheight.csv", " inches");
+                        }, 800)
                     })
                     .on("mouseover", function(d) {
                         div.transition()
@@ -247,9 +267,13 @@ d3.csv("mean_nonsmoker.csv", function(error, data) {
                     });
                 svg.selectAll("circle.dots2")
                     .on('click', function(d) {
-                        boxplot(d.Ht, "Smokebyheight.csv", "NonSmokebyheight.csv", " inches");
-                        d3.selectAll(".person").remove();
-                        gender(d.i, "smoke", "Nsmoke_scatt.csv", "Smoke_scatt.csv");
+                        d3.selectAll(".person")
+                            .style("opacity", 1)
+                            .transition().duration(1000).style("opacity", 0).remove();
+                        setTimeout(function() {
+                            gender(d.i, "smoke", "Nsmoke_scatt.csv", "Smoke_scatt.csv");
+                            boxplot(d.Ht, "Smokebyheight.csv", "NonSmokebyheight.csv", " inches");
+                        }, 800)
                     })
                     .on("mouseover", function(d) {
                         div.transition()
@@ -273,9 +297,13 @@ d3.csv("mean_nonsmoker.csv", function(error, data) {
                     .text("Average FEV at each Age");
                 svg.selectAll("circle.dots1")
                     .on('click', function(d) {
-                        boxplot(d.Age, "smokey.csv","smoken.csv", " years old");
-                        d3.selectAll(".person").remove();
-                        gender(d.i, "", "mean_nonsmoker.csv", "mean_smoker.csv");
+                        d3.selectAll(".person")
+                            .style("opacity", 1)
+                            .transition().duration(1000).style("opacity", 0).remove();
+                        setTimeout(function() {
+                            gender(d.i, "", "mean_nonsmoker.csv", "mean_smoker.csv");
+                            boxplot(d.Age, "smokey.csv","smoken.csv", " years old");
+                        }, 800)
                     })
                     .on("mouseover", function(d) {
                         div.transition()
@@ -292,9 +320,13 @@ d3.csv("mean_nonsmoker.csv", function(error, data) {
                     });
                 svg.selectAll("circle.dots2")
                     .on('click', function(d) {
-                        boxplot(d.Age, "smokey.csv","smoken.csv", " years old");
-                        d3.selectAll(".person").remove();
-                        gender(d.i, "smoke", "mean_nonsmoker.csv", "mean_smoker.csv");
+                        d3.selectAll(".person")
+                            .style("opacity", 1)
+                            .transition().duration(1000).style("opacity", 0).remove();
+                        setTimeout(function() {
+                            gender(d.i, "smoke", "mean_nonsmoker.csv", "mean_smoker.csv");
+                            boxplot(d.Age, "smokey.csv","smoken.csv", " years old");
+                        }, 800)
                     })
                     .on("mouseover", function(d) {
                         div.transition()
@@ -669,14 +701,18 @@ function boy(pos, ypos, color, clas) {
         .attr("stroke", "black")
         .attr("fill", color)
         .attr("stroke-width", "1")
-        .attr("transform", "translate(" + pos + "," + ypos + ")scale(0.35)");
+        .attr("transform", "translate(" + pos + "," + ypos + ")scale(0.35)")
+        .style("opacity", 0)
+        .transition().duration(1000).style("opacity", 1);
     svg3.append("path")
         .attr("class", clas)
         .attr("d", "M68.074,54.008L59.296,26.81c-0.47-1.456-2.036-2.596-3.566-2.596h-1.312H53.48H38.526h-0.938h-1.312 c-1.53,0-3.096,1.14-3.566,2.596l-8.776,27.198c-0.26,0.807-0.152,1.623,0.297,2.24s1.193,0.971,2.041,0.971h2.25 c1.53,0,3.096-1.14,3.566-2.596l2.5-7.75v10.466v0.503v29.166c0,2.757,2.243,5,5,5h0.352c2.757,0,5-2.243,5-5V60.842h2.127v26.166 c0,2.757,2.243,5,5,5h0.352c2.757,0,5-2.243,5-5V57.842v-0.503v-10.47l2.502,7.754c0.47,1.456,2.036,2.596,3.566,2.596h2.25 c0.848,0,1.591-0.354,2.041-0.971S68.334,54.815,68.074,54.008z")
         .attr("stroke", "black")
         .attr("fill", color)
         .attr("stroke-width", "1")
-        .attr("transform", "translate(" + pos + "," + ypos + ")scale(0.35)");
+        .attr("transform", "translate(" + pos + "," + ypos + ")scale(0.35)")
+        .style("opacity", 0)
+        .transition().duration(1000).style("opacity", 1);
 }
 function girl(pos, ypos, color, clas) {
     svg3.append("path")
@@ -685,7 +721,9 @@ function girl(pos, ypos, color, clas) {
         .attr("stroke", "black")
         .attr("fill", color)
         .attr("stroke-width", "0.4")
-        .attr("transform", "translate("+ ( pos + 1.8) + "," + ypos + ")scale(0.9)");
+        .attr("transform", "translate("+ ( pos + 1.8) + "," + ypos + ")scale(0.9)")
+        .style("opacity", 0)
+        .transition().duration(1000).style("opacity", 1);
 
     svg3.append("path")
         .attr("class", clas)
@@ -693,7 +731,9 @@ function girl(pos, ypos, color, clas) {
         .attr("stroke", "black")
         .attr("fill", color)
         .attr("stroke-width", "1")
-        .attr("transform", "translate("+ (pos + 1.3) + "," + (ypos - 3) + ")scale(0.32)");
+        .attr("transform", "translate("+ (pos + 1.3) + "," + (ypos - 3) + ")scale(0.32)")
+        .style("opacity", 0)
+        .transition().duration(1000).style("opacity", 1);
 }
 
 function gender(index, file, filename1, filename2) {
