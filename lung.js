@@ -238,7 +238,7 @@ d3.csv("mean_nonsmoker.csv", function(error, data) {
                             .style("opacity", .9);
                         div	.html("Ht: " + (d.Ht) + "<br/>" + "FEV: " + Math.round(d.FEV*100)/100)
                             .style("left", (d3.event.pageX) + "px")
-                            .style("top", (d3.event.pageY - 28) + "px"), d3.selectAll(".dots2").style("cursor", "pointer");
+                            .style("top", (d3.event.pageY - 28) + "px"), d3.selectAll(".dots1").style("cursor", "pointer");
                     })
                     .on("mouseout", function(d) {
                         div.transition()
@@ -283,7 +283,7 @@ d3.csv("mean_nonsmoker.csv", function(error, data) {
                             .style("opacity", .9);
                         div	.html("Age: " + (d.Age) + "<br/>" + "FEV: " + Math.round(d.FEV*100)/100)
                             .style("left", (d3.event.pageX) + "px")
-                            .style("top", (d3.event.pageY - 28) + "px"), d3.selectAll(".dots2").style("cursor", "pointer");
+                            .style("top", (d3.event.pageY - 28) + "px"), d3.selectAll(".dots1").style("cursor", "pointer");
                     })
                     .on("mouseout", function(d) {
                         div.transition()
